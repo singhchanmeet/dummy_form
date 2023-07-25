@@ -11,6 +11,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        gap: 5px;
     }
 </style>
 
@@ -29,6 +31,7 @@
         <input type="file" required name="image" accept="image/*" placeholder="Tasveer"/>
         <button type="submit">Submit</button>
         <button type="button" onclick="submitToNodeServer()">Submit to Node.js</button>
+        <button type="button" onclick="submitToPHP()">Submit to PHP</button>
     </form>
 </body>
 <script>
@@ -60,5 +63,28 @@
             alert('An error occurred while submitting data to Node.js server.');
         });
     }
+
+    function submitToPHP() {
+        const formData = new FormData(document.querySelector("form"));
+
+        // Append a hidden field with the name "backend" and value "php"
+        formData.append("backend", "php");
+
+        // Send the form data to the PHP backend using fetch API
+        fetch("http://localhost/php_scripts/form_handler.php", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => {
+            // Handle the response from the PHP backend if needed
+            console.log(response);
+            alert('Data submitted to PHP server successfully!');
+        })
+        .catch(error => {
+            // Handle errors
+            console.error(error);
+        });
+    }
+
 </script>
 </html>
