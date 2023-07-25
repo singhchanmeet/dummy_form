@@ -1,10 +1,13 @@
 const express = require('express');
 const mysql = require('mysql2');
+const cors = require('cors');
 const multer = require('multer'); // Required to handle file uploads
 const path = require('path');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' }); // Set the destination for uploaded files
+
+app.use(cors());
 
 const pool = mysql.createPool({
   host: 'localhost',
@@ -16,14 +19,6 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
-
-app.set('view engine', 'hbs');
-
-app.get('/', (req, res) => {
-  res.render('index');
-});
 
 app.post('/submit', upload.single('image'), (req, res) => {
   const { name, dob, contact, address, category } = req.body;

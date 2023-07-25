@@ -28,6 +28,37 @@
         </select><br>
         <input type="file" required name="image" accept="image/*" placeholder="Tasveer"/>
         <button type="submit">Submit</button>
+        <button type="button" onclick="submitToNodeServer()">Submit to Node.js</button>
     </form>
 </body>
+<script>
+    function submitToNodeServer() {
+        // Get the form element
+        const form = document.querySelector('form');
+
+        // Get the form data
+        const formData = new FormData(form);
+
+        // Send the form data to the Node.js server using fetch API
+        fetch('http://localhost:3000/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .then(data => {
+            console.log(data); // Log the response from the Node.js server
+            alert('Data submitted to Node.js server successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting data to Node.js server.');
+        });
+    }
+</script>
 </html>
