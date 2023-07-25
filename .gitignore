@@ -1,3 +1,4 @@
 node_modules/
 form/migrations/__pycache__/
 uploads/
+media/
