@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy</title>
+</head>
+
+<style>
+    .centered{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <form method='post' enctype='multipart/form-data' action='/index/' class='centered'>
+        {% csrf_token %}
+        <input type="text" required name="name" placeholder="Naam"/><br>
+        <input type="date" required name="dob" placeholder="dob"/><br>
+        <input type="text" required name="contact" placeholder="contact"/><br>
+        <input type="text" required name="address" placeholder="address"/><br>
+        <select name="category" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+        <input type="file" required name="image" accept="image/*" placeholder="Tasveer"/>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
